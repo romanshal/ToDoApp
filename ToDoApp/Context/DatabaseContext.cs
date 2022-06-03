@@ -11,5 +11,6 @@ namespace ToDoApp.Context
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
         public DbSet<TaskDb> Tasks { get; set; }
+        public DbSet<TasksListDb> TasksList { get; set; }
     }
 }

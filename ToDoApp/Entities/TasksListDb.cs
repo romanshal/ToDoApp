@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace ToDoApp.Entities
 {
-    [Table("Tasks")]
-    public class TaskDb
+    [Table("TasksList")]
+    public class TasksListDb
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("TasksList")]
-        public int ListId { get; set; }
-        public string Topic { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime ChacngeDate { get; set; }
-        public int Status { get; set; }
 
-        public virtual TasksListDb TasksList { get; set; }
+        [ForeignKey("ListId")]
+        public virtual ICollection<TaskDb> Tasks { get; set; }
     }
 }

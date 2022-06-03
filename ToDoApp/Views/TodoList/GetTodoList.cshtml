@@ -1,1 +1,13 @@
 ﻿@model IEnumerable<ToDoApp.Models.TaskBLL>
+
+@if (Model.Count() == 0)
+{
+    <h1>Нет данных</h1>
+}
+else
+{
+    foreach (var item in Model)
+    {
+        <h1>@item.Id</h1>
+    }
+}
