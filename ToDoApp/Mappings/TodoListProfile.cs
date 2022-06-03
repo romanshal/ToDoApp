@@ -14,6 +14,8 @@ namespace ToDoApp.Mappings
         {
             CreateMap<TaskDb, TaskBLL>()
                 .ReverseMap();
+            CreateMap<TasksListDb, TasksListBLL>()
+                .ReverseMap();
         }
     }
 }

@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 
 namespace ToDoApp.Models
 {
-    public class TaskBLL
+    public class TasksListBLL
     {
         public int Id { get; set; }
-        public int ListId { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime ChacngeDate { get; set; }
-        public int Status { get; set; }
     }
 }
