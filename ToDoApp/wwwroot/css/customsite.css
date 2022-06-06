@@ -42,6 +42,7 @@
         height: 50px;
         padding-left: 25px;
         cursor: pointer;
+        margin: 5px 0 5px 0;
     }
 
         .widget li i {
@@ -87,8 +88,10 @@
         background: mistyrose;
         padding: 8px 15px 8px 15px;
         cursor: pointer;
+        font-weight: 500;
     }
 
     .calendar-period .activ {
         background: red;
+        color: #fff;
     }
