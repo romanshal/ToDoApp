@@ -1,13 +1,108 @@
 ﻿@model IEnumerable<ToDoApp.Models.TaskBLL>
 
-@if (Model.Count() == 0)
-{
-    <h1>Нет данных</h1>
+@{
+    Layout = "_Layout";
 }
-else
-{
-    foreach (var item in Model)
-    {
-        <h1>@item.Id</h1>
+
+<style>
+    .calendar-body {
+        /*width: 220px;*/
+        /*border: 1px solid #c0c0c0;*/
+        /*padding: 6px;*/
+        margin: 0 auto;
     }
-}
+
+    #calendar-widget {
+        width: 100%;
+        line-height: 1.2em;
+        font-size: 25px;
+        font-weight: 600;
+        text-align: center;
+        border-spacing: 0px;
+    }
+
+        #calendar-widget tr.dn td {
+            font-size: 15px;
+        }
+
+        #calendar-widget thead tr.hn {
+            background: #fff;
+            height: 40px;
+        }
+
+        #calendar-widget thead tr:last-child {
+            font-size: small;
+            color: #555555;
+            height: 100px;
+            text-align: center;
+        }
+
+        #calendar-widget thead tr:nth-child(1) td:nth-child(2) {
+            color: #323232;
+        }
+
+        #calendar-widget thead tr:nth-child(1) td:nth-child(1):hover,
+        #calendar-widget thead tr:nth-child(1) td:nth-child(3):hover {
+            cursor: pointer;
+        }
+
+        #calendar-widget tbody {
+            background: #fff;
+            text-align: center;
+            border-top: 1px solid #c0c0c0;
+        }
+
+            #calendar-widget tbody tr {
+                border-bottom: 1px solid #c0c0c0;
+            }
+
+            #calendar-widget tbody td {
+                color: #2c567a;
+                min-height: 50px;
+                height: 120px;
+            }
+
+            /*    #calendar-widget tbody td:nth-child(n+6),
+                #calendar-widget .holiday {
+                    color: #e78c5c;
+                }*/
+
+                #calendar-widget tbody td.today {
+                    color: #e78c5c;
+                    border-top: 3px solid #e78c5c;
+                }
+</style>
+
+<div class="custom-container">
+    <div id="calendar" class="calendar">
+        <div class="calendar-header">
+            <h3 class="">Calendar</h3>
+
+            <ul id="calendar-period" class="calendar-period">
+                <li class="calendar-period__item">Day</li>
+                <li class="calendar-period__item">Week</li>
+                <li class="calendar-period__item">Month</li>
+                <li class="calendar-period__item">Year</li>
+            </ul>
+        </div>
+
+        <div class="calendar-body">
+            <table id="calendar-widget">
+                <thead>
+                    <tr class="hn">
+                        <td><b>‹</b>
+                        <td colspan="5">
+                        <td><b>›</b>
+                    <tr class="dn"><td>Mon<td>Tue<td>Wed<td>Thu<td>Fri<td>Sat<td>Sun
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="dashboard" class="dashboard">
+        <div class="dashboard-header">
+
+        </div>
+    </div>
+</div>

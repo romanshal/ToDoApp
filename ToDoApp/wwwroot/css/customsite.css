@@ -1,0 +1,94 @@
+﻿body {
+    overflow: hidden;
+}
+
+.widget {
+    position: fixed;
+    background: white;
+    width: 220px;
+    height: 100%;
+    box-shadow: 2px 2px 8px rgb(0 0 0 / 10%);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+    .widget .logo {
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+    }
+
+        .widget .logo img {
+            width: 80px;
+        }
+
+        .widget .logo h3 {
+            align-self: end;
+        }
+
+    .widget ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .widget li {
+        display: flex;
+        align-items: center;
+        height: 50px;
+        padding-left: 25px;
+        cursor: pointer;
+    }
+
+        .widget li i {
+            margin-right: 10px;
+        }
+
+        .widget li:hover {
+            background: linear-gradient(to right, #ff8d8d, white 13%);
+            color: #ff8d8d;
+        }
+
+        .widget li.activ {
+            background: linear-gradient(to right, #ff8d8d, white 13%);
+            color: red;
+        }
+
+.content {
+    margin-left: 220px;
+    background: #f5f5f5;
+    height: calc(100vh);
+}
+
+.custom-container {
+    padding: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.calendar-period {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+}
+
+    .calendar-period .calendar-period__item {
+        align-self: center;
+        margin: 0 10px 0 10px;
+        border-radius: 10px;
+        background: mistyrose;
+        padding: 8px 15px 8px 15px;
+        cursor: pointer;
+    }
+
+    .calendar-period .activ {
+        background: red;
+    }
