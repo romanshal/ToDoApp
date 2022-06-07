@@ -45,16 +45,16 @@
                         {
                             <h5>You dont't have any lists</h5>
                             @*<div class="tasks-list__item">
-                                <div class="icon">
-                                    <img src="~/img/12.png" />
-                                </div>
-                                <div class="name">
-                                    Home
-                                </div>
-                                <div class="settings">
-                                    <i class="fa-solid fa-gear"></i>
-                                </div>
-                            </div>*@
+                                    <div class="icon">
+                                        <img src="~/img/12.png" />
+                                    </div>
+                                    <div class="name">
+                                        Home
+                                    </div>
+                                    <div class="settings">
+                                        <i class="fa-solid fa-gear"></i>
+                                    </div>
+                                </div>*@
                         }
                         else
                         {
@@ -76,7 +76,7 @@
                     }
                 </div>
 
-                <button class="btn btn-light">
+                <button id="create-list-button" class="btn btn-light">
                     <i class="fa-solid fa-plus"></i>
                     Create list
                 </button>
@@ -98,6 +98,41 @@
     <div id="dashboard" class="dashboard">
         <div class="dashboard-header">
 
+        </div>
+    </div>
+</div>
+
+<div id="modListDialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="dialogContent" class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create list</h4>
+
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="creat-list-form" novalidate>
+                    <div class="text-field">
+                        <input class="text-field__input" id="id" type="number" asp-for="Id" placeholder="Id" autocomplete="off" value="0" hidden />
+                    </div>
+
+                    <div class="text-field">
+                        <input class="text-field__input" id="name" type="text" asp-for="Name" placeholder="Name" autocomplete="off" />
+                    </div>
+
+                    <div class="text-field">
+                        <textarea class="text-field__textarea" id="description" asp-for="Description" name="Description" placeholder="Description"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>

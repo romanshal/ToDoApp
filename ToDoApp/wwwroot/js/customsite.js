@@ -13,6 +13,10 @@
         $('#task-calendar-widget tbody td').removeClass('activ');
         $(this).addClass('activ');
     })
+
+    $('#create-list-button').click(function () {
+        $('#modListDialog').modal('show');
+    })
 });
 
 function calendar(id, year, month) {

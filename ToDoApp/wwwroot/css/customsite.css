@@ -135,9 +135,9 @@
     }
 
         #task-calendar-widget tbody td:hover {
-            background: red;
-            color: #fff;
-            border-radius: 50%;
+            /*background: red;*/
+            color: red;
+/*            border-radius: 50%;*/
         }
 
         #task-calendar-widget tbody td.activ {
