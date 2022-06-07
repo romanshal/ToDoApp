@@ -26,10 +26,14 @@ namespace ToDoApp
                         options.UseSqlServer(Configuration["Data:TodoList:ConnectionString"]));
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
-            services.AddAutoMapper(typeof(TodoListProfile));
+            services.AddAutoMapper(typeof(TaskProfile));
+            services.AddAutoMapper(typeof(TasksListProfile));
 
-            services.AddScoped<ITodoListRepository, TodoListRepository>();
-            services.AddScoped<ITodoListService, TodoListService>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITasksListRepository, TasksListRepository>();
+
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<ITasksListService, TasksListService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

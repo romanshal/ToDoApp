@@ -1,77 +1,8 @@
-﻿@model IEnumerable<ToDoApp.Models.TaskBLL>
+﻿@model ToDoApp.Models.TodoListModel
 
 @{
     Layout = "_Layout";
 }
-
-<style>
-    .calendar-body {
-        /*width: 220px;*/
-        /*border: 1px solid #c0c0c0;*/
-        /*padding: 6px;*/
-        margin: 0 auto;
-    }
-
-    #calendar-widget {
-        width: 100%;
-        line-height: 1.2em;
-        font-size: 25px;
-        font-weight: 600;
-        text-align: center;
-        border-spacing: 0px;
-    }
-
-        #calendar-widget tr.dn td {
-            font-size: 15px;
-        }
-
-        #calendar-widget thead tr.hn {
-            background: #fff;
-            height: 40px;
-        }
-
-        #calendar-widget thead tr:last-child {
-            font-size: small;
-            color: #555555;
-            height: 100px;
-            text-align: center;
-        }
-
-        #calendar-widget thead tr:nth-child(1) td:nth-child(2) {
-            color: #323232;
-        }
-
-        #calendar-widget thead tr:nth-child(1) td:nth-child(1):hover,
-        #calendar-widget thead tr:nth-child(1) td:nth-child(3):hover {
-            cursor: pointer;
-        }
-
-        #calendar-widget tbody {
-            background: #fff;
-            text-align: center;
-            border-top: 1px solid #c0c0c0;
-        }
-
-            #calendar-widget tbody tr {
-                border-bottom: 1px solid #c0c0c0;
-            }
-
-            #calendar-widget tbody td {
-                color: #2c567a;
-                min-height: 50px;
-                height: 120px;
-            }
-
-            /*    #calendar-widget tbody td:nth-child(n+6),
-                #calendar-widget .holiday {
-                    color: #e78c5c;
-                }*/
-
-                #calendar-widget tbody td.today {
-                    color: #e78c5c;
-                    border-top: 3px solid #e78c5c;
-                }
-</style>
 
 <div class="custom-container">
     <div id="calendar" class="calendar">
@@ -87,6 +18,70 @@
         </div>
 
         <div class="calendar-body">
+            <div class="manager-widget">
+                <button class="btn btn-danger">
+                    <i class="fa-solid fa-plus"></i>
+                    Create task
+                </button>
+
+                <div class="task-calendar">
+                    <table id="task-calendar-widget">
+                        <thead>
+                            <tr class="hn">
+                                <td><b>‹</b>
+                                <td colspan="5">
+                                <td><b>›</b>
+                            <tr class="dn"><td>Mon<td>Tue<td>Wed<td>Thu<td>Fri<td>Sat<td>Sun
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <h4>Lists</h4>
+
+                <div class="tasks-list">
+                    @{
+                        if (Model.Lists.Count() == 0)
+                        {
+                            <h5>You dont't have any lists</h5>
+                            @*<div class="tasks-list__item">
+                                <div class="icon">
+                                    <img src="~/img/12.png" />
+                                </div>
+                                <div class="name">
+                                    Home
+                                </div>
+                                <div class="settings">
+                                    <i class="fa-solid fa-gear"></i>
+                                </div>
+                            </div>*@
+                        }
+                        else
+                        {
+                            foreach (var item in Model.Lists)
+                            {
+                                <div class="tasks-list__item">
+                                    <div class="icon">
+                                        <img src="data:image/jpg;base64, @item.Icon" />
+                                    </div>
+                                    <div class="name">
+                                        @item.Name
+                                    </div>
+                                    <div class="settings">
+                                        <i class="fa-solid fa-gear"></i>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+
+                <button class="btn btn-light">
+                    <i class="fa-solid fa-plus"></i>
+                    Create list
+                </button>
+            </div>
+
             <table id="calendar-widget">
                 <thead>
                     <tr class="hn">

@@ -3,25 +3,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ToDoApp.Repositories;
+using ToDoApp.Models;
 using ToDoApp.Services;
 
 namespace ToDoApp.Controllers
 {
     public class ToDoListController : Controller
     {
-        private readonly ITodoListService _todoListService;
+        private readonly ITaskService _taskService;
+        private readonly ITasksListService _tasksListService;
 
-        public ToDoListController(ITodoListService todoListService)
+        public ToDoListController(ITaskService taskService, ITasksListService tasksListService)
         {
-            this._todoListService = todoListService;
+            this._taskService = taskService;
+            this._tasksListService = tasksListService;
         }
 
         [Route("")]
         [HttpGet]
         public async Task<IActionResult> GetTodoList()
         {
-            var result = await _todoListService.GetTasksAsync();
+            var result = new TodoListModel();
+            result.Tasks = await _taskService.GetTasksAsync();
+            result.Lists = await _tasksListService.GetTasksListsAsync();
+
             return View(result);
         }
     }

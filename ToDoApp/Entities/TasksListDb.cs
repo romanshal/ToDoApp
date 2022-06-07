@@ -14,6 +14,7 @@ namespace ToDoApp.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public byte[] Icon { get; set; }
 
         [ForeignKey("ListId")]
         public virtual ICollection<TaskDb> Tasks { get; set; }

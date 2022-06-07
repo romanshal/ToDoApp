@@ -8,6 +8,11 @@
         $('#nav-menu li').removeClass('activ');
         $(this).addClass('activ');
     })
+
+    $('#task-calendar-widget tbody td').click(function () {
+        $('#task-calendar-widget tbody td').removeClass('activ');
+        $(this).addClass('activ');
+    })
 });
 
 function calendar(id, year, month) {
@@ -42,12 +47,22 @@ function calendar(id, year, month) {
         document.querySelector('#' + id + ' tbody').innerHTML += '<tr><td> <td> <td> <td> <td> <td> <td> ';
     }
 }
+
 calendar("calendar-widget", new Date().getFullYear(), new Date().getMonth());
+calendar("task-calendar-widget", new Date().getFullYear(), new Date().getMonth());
+
 // переключатель минус месяц
 document.querySelector('#calendar-widget thead tr:nth-child(1) td:nth-child(1)').onclick = function () {
     calendar("calendar-widget", document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.month) - 1);
 }
+document.querySelector('#task-calendar-widget thead tr:nth-child(1) td:nth-child(1)').onclick = function () {
+    calendar("task-calendar-widget", document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.month) - 1);
+}
+
 // переключатель плюс месяц
 document.querySelector('#calendar-widget thead tr:nth-child(1) td:nth-child(3)').onclick = function () {
     calendar("calendar-widget", document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.month) + 1);
+}
+document.querySelector('#task-calendar-widget thead tr:nth-child(1) td:nth-child(3)').onclick = function () {
+    calendar("task-calendar-widget", document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.month) + 1);
 }

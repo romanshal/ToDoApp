@@ -95,3 +95,168 @@
         background: red;
         color: #fff;
     }
+
+.calendar-body {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.manager-widget {
+    width: 360px;
+    background: #fff;
+    margin: 0 20px 0 0;
+    padding: 20px;
+}
+
+    .manager-widget button {
+        width: 100%;
+    }
+
+.task-calendar {
+    width: 100%;
+    padding: 10px;
+}
+
+#task-calendar-widget {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+    border-spacing: 0px;
+}
+
+    #task-calendar-widget tbody td {
+        color: #2c567a;
+        height: 35px;
+        width: 35px;
+        min-width: 35px;
+        min-height: 35px;
+        cursor: pointer;
+    }
+
+        #task-calendar-widget tbody td:hover {
+            background: red;
+            color: #fff;
+            border-radius: 50%;
+        }
+
+        #task-calendar-widget tbody td.activ {
+            background: red;
+            color: #fff;
+            border-radius: 50%;
+        }
+
+.tasks-list {
+    height: 396px;
+    overflow: auto;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.tasks-list__item {
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid silver;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 10px;
+}
+
+    .tasks-list__item .icon {
+        background: #fff;
+        align-self: center;
+        height: 100%;
+        display: flex;
+        border-radius: 50%;
+    }
+
+        .tasks-list__item .icon img {
+            border-radius: 50%;
+        }
+
+    .tasks-list__item .name {
+        padding: 0 10px 0 10px;
+        align-self: center;
+    }
+
+    .tasks-list__item .settings {
+        background: #f8f9fa;
+        align-self: center;
+        height: 100%;
+        width: 50px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        display: flex;
+        margin-left: auto;
+        box-shadow: -2px 2px 8px rgb(0 0 0 / 10%);
+        cursor: pointer;
+    }
+
+        .tasks-list__item .settings:hover {
+            background: #e2e6ea;
+        }
+
+        .tasks-list__item .icon i,
+        .tasks-list__item .settings i {
+            margin: auto;
+        }
+
+#calendar-widget {
+    width: 100%;
+    line-height: 1.2em;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    border-spacing: 0px;
+}
+
+    #calendar-widget tr.dn td {
+        font-size: 15px;
+    }
+
+    #calendar-widget thead tr.hn {
+        background: #fff;
+        height: 40px;
+    }
+
+    #calendar-widget thead tr:last-child {
+        font-size: small;
+        color: #555555;
+        height: 100px;
+        text-align: center;
+    }
+
+    #calendar-widget thead tr:nth-child(1) td:nth-child(2) {
+        color: #323232;
+    }
+
+    #calendar-widget thead tr:nth-child(1) td:nth-child(1):hover,
+    #calendar-widget thead tr:nth-child(1) td:nth-child(3):hover,
+    #task-calendar-widget thead tr:nth-child(1) td:nth-child(1):hover,
+    #task-calendar-widget thead tr:nth-child(1) td:nth-child(3):hover {
+        cursor: pointer;
+    }
+
+    #calendar-widget tbody {
+        background: #fff;
+        text-align: center;
+        border-top: 1px solid #c0c0c0;
+    }
+
+        #calendar-widget tbody tr {
+            border-bottom: 1px solid #c0c0c0;
+        }
+
+        #calendar-widget tbody td {
+            color: #2c567a;
+            min-height: 50px;
+            height: 120px;
+            width: 150px;
+        }
+
+            #calendar-widget tbody td.today {
+                color: #e78c5c;
+                border-top: 3px solid #e78c5c;
+            }

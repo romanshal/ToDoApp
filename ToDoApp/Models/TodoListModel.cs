@@ -7,6 +7,7 @@ namespace ToDoApp.Models
 {
     public class TodoListModel
     {
-        public IEnumerable<TaskBLL> todoList { get; set; }
+        public IEnumerable<TaskBLL> Tasks { get; set; }
+        public IEnumerable<TasksListBLL> Lists { get; set; }
     }
 }

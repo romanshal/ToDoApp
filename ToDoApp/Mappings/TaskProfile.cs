@@ -8,13 +8,14 @@ using ToDoApp.Models;
 
 namespace ToDoApp.Mappings
 {
-    public class TodoListProfile : Profile
+    public class TaskProfile : Profile
     {
-        public TodoListProfile()
+        public TaskProfile()
         {
             CreateMap<TaskDb, TaskBLL>()
                 .ReverseMap();
-            CreateMap<TasksListDb, TasksListBLL>()
+
+            CreateMap<TaskBLL, TaskDb>()
                 .ReverseMap();
         }
     }
