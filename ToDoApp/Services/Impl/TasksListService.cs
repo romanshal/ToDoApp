@@ -19,7 +19,7 @@ namespace ToDoApp.Services.Impl
             this._mapper = mapper;
         }
 
-        public async Task<int> CreateTasksListAsync(TasksListBLL tasksListDb)
+        public async Task<int> CreateTasksListAsync(TasksListModel tasksListDb)
         {
             return await _tasksListRepository.CreateTasksListAsync(_mapper.Map<TasksListDb>(tasksListDb)).ContinueWith(r => r.Result);
         }

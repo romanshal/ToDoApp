@@ -17,7 +17,9 @@ namespace ToDoApp.Controllers
             this._tasksListService = tasksListService;
         }
 
-        public async Task<IActionResult> CreateTasksListAsync(TasksListBLL tasksList)
+        [HttpPost]
+        [Route("createlist")]
+        public async Task<IActionResult> CreateTasksListAsync(TasksListModel tasksList)
         {
             var result = await _tasksListService.CreateTasksListAsync(tasksList);
 
@@ -31,6 +33,7 @@ namespace ToDoApp.Controllers
             }
         }
 
+        [HttpPost]
         public async Task<IActionResult> UpdateTaskAsync(TasksListBLL newtasksList)
         {
             var result = await _tasksListService.UpdateTasksListAsync(newtasksList);
@@ -45,6 +48,7 @@ namespace ToDoApp.Controllers
             }
         }
 
+        [HttpDelete]
         public async Task<IActionResult> DeleteTasksListAsync(int tasksListId)
         {
             var result = await _tasksListService.DeleteTasksListAsync(tasksListId);

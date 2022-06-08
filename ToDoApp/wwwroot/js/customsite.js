@@ -10,13 +10,70 @@
     })
 
     $('#task-calendar-widget tbody td').click(function () {
-        $('#task-calendar-widget tbody td').removeClass('activ');
-        $(this).addClass('activ');
+        if (this.innerText === '' || this.innerText === undefined || this.innerText === null) {
+            return;
+        } else {
+            $('#task-calendar-widget tbody td').removeClass('activ');
+            $(this).addClass('activ');
+        }
     })
 
     $('#create-list-button').click(function () {
         $('#modListDialog').modal('show');
     })
+
+    $(function () {
+        $('#save-button').click(function (e) {
+            e.preventDefault();
+
+            var valid = check_create_list_form();
+
+            if (valid) {
+                var data = new FormData($('#creat-list-form')[0]);
+
+                $.ajax({
+                    url: '/createlist',
+                    type: 'POST',
+                    data: data,
+                    cache: false,
+/*                    dataType: 'json',*/
+                    processData: false,
+                    contentType: false,
+                    success: function () {
+                        window.location.href = "";
+                    },
+                    error: function () {
+                        alert('Ops... Something went wrong :(');
+                    }
+                });
+            }
+        });
+    });
+
+    function check_create_list_form() {
+        var valid_form = true;
+
+        var name = document.getElementById('create-list-name');
+        if (name.value == '') {
+            name.style.border = '1px solid red';
+            valid_form = false;
+        }
+
+        var description = document.getElementById('create-list-description');
+        if (description.value == '') {
+            description.style.border = '1px solid red';
+            valid_form = false;
+        }
+
+        var icon = document.getElementById('create-list-icon');
+        console.log(icon.files);
+        if (icon.files.length === 0) {
+            icon.style.border = '1px solid red';
+            valid_form = false;
+        }
+
+        return valid_form;
+    }
 });
 
 function calendar(id, year, month) {

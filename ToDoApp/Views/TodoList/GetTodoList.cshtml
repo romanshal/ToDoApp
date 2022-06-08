@@ -62,7 +62,20 @@
                             {
                                 <div class="tasks-list__item">
                                     <div class="icon">
-                                        <img src="data:image/jpg;base64, @item.Icon" />
+                                        @{
+                                            if (item.Icon.Length != 0)
+                                            {
+                                                var base64 = Convert.ToBase64String(item.Icon);
+                                                var imgSrc = String.Format("data:image/png;base64,{0}", base64);
+
+                                                <img src="@imgSrc" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/img/default-list-icon.jpg" />
+                                            }
+                                        }
+
                                     </div>
                                     <div class="name">
                                         @item.Name
@@ -114,24 +127,28 @@
             </div>
 
             <div class="modal-body">
-                <form id="creat-list-form" novalidate>
+                <form id="creat-list-form">
                     <div class="text-field">
-                        <input class="text-field__input" id="id" type="number" asp-for="Id" placeholder="Id" autocomplete="off" value="0" hidden />
+                        <input class="text-field__input" id="create-list-id" type="number" placeholder="Id" name="Id" autocomplete="off" value="0" hidden />
                     </div>
 
                     <div class="text-field">
-                        <input class="text-field__input" id="name" type="text" asp-for="Name" placeholder="Name" autocomplete="off" />
+                        <input class="text-field__input" id="create-list-name" type="text" name="Name" placeholder="Name" autocomplete="off" />
                     </div>
 
                     <div class="text-field">
-                        <textarea class="text-field__textarea" id="description" asp-for="Description" name="Description" placeholder="Description"></textarea>
+                        <textarea class="text-field__textarea" id="create-list-description" name="Description" placeholder="Description"></textarea>
+                    </div>
+
+                    <div class="text-field">
+                        <input class="text-field__input" id="create-list-icon" type="file" name="Icon" accept=".jpg, .jpeg, .png" />
                     </div>
                 </form>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary" id="save-button">Save</button>
             </div>
         </div>
     </div>

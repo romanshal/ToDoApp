@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ToDoApp.Models
 {
-    public class TasksListBLL
+    public class TasksListModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public byte[] Icon { get; set; }
+        public IFormFile Icon { get; set; }
     }
 }

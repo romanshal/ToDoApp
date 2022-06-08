@@ -8,7 +8,7 @@ namespace ToDoApp.Services
 {
     public interface ITasksListService
     {
-        Task<int> CreateTasksListAsync(TasksListBLL tasksListDb);
+        Task<int> CreateTasksListAsync(TasksListModel tasksListDb);
         Task<IEnumerable<TasksListBLL>> GetTasksListsAsync();
         Task<TasksListBLL> GetTasksListByIdAsync(int tasksListId);
         Task<int> UpdateTasksListAsync(TasksListBLL newTasksList);
