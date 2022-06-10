@@ -260,8 +260,20 @@
                 border-top: 3px solid #e78c5c;
             }
 
+
+button.close {
+    padding: 0.3rem 0.6rem !important;
+    margin: -0.5rem -0.5rem -1rem auto !important;
+    background: red !important;
+    border-radius: 50%;
+}
+
 .text-field {
     margin-bottom: 1rem;
+}
+
+.field-icon {
+    display: flex;
 }
 
 .text-field__input {
@@ -273,26 +285,55 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: white;
-    background-color: rgba(127,127,127,0.2);
+    color: black;
+    background-color: #f8f9fa;
     background-clip: padding-box;
-    border: 1px solid #bdbdbd;
+    border: 1px solid #a1a1a1;
     border-radius: 0.7rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
     .text-field__input::placeholder {
-        color: #c4c4c4;
+        color: #a1a1a1;
         opacity: 0.4;
     }
 
     .text-field__input:focus {
-        color: white;
-        background-color: rgba(127,127,127,0.2);
+        color: black;
+        background-color: #f8f9fa;
         border-color: #bdbdbd;
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
     }
+
+.input-icon {
+    color: black;
+    width: 65%;
+    margin-right: 20px;
+}
+
+    .input-icon::file-selector-button {
+        padding: .2em .4em;
+        border-radius: 10px;
+        background-color: red;
+        transition: 1s;
+        color: white;
+        margin: 0px;
+        border: red;
+        margin-top: -6px;
+        margin-left: -10px;
+        margin-right: 20px;
+        cursor: pointer;
+        opacity: .5;
+    }
+
+        .input-icon::file-selector-button:hover {
+            opacity: 1;
+        }
+
+.preview-icon-img {
+    height: calc(2.25rem + 2px);
+}
 
 .text-field__textarea {
     display: block;
@@ -304,8 +345,8 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: white;
-    background-color: rgba(127,127,127,0.2);
+    color: black;
+    background-color: #f8f9fa;
     background-clip: padding-box;
     border: 1px solid #bdbdbd;
     border-radius: 0.7rem;
@@ -313,13 +354,13 @@
 }
 
     .text-field__textarea::placeholder {
-        color: #c4c4c4;
+        color: #a1a1a1;
         opacity: 0.4;
     }
 
     .text-field__textarea:focus {
-        color: white;
-        background-color: rgba(127,127,127,0.2);
+        color: black;
+        background-color: #f8f9fa;
         border-color: #bdbdbd;
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);

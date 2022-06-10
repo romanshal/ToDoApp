@@ -74,6 +74,28 @@
 
         return valid_form;
     }
+
+    FReader = new FileReader();
+
+    // событие, когда файл загрузится
+    FReader.onload = function (e) {
+        document.querySelector("#create-list-icon-img").src = e.target.result;
+        document.getElementById('create-list-icon-img').style.visibility = "visible";
+    };
+
+    // выполнение функции при выборки файла
+    document.querySelector("#create-list-icon").addEventListener("change", loadImageFile);
+
+    // функция выборки файла
+    function loadImageFile() {
+        var icon = document.getElementById('create-list-icon');
+        if (icon.files.length !== 0) {
+            var file = document.querySelector("#create-list-icon").files[0];
+            FReader.readAsDataURL(file);
+        } else {
+            document.getElementById('create-list-icon-img').style.visibility = "hidden";
+        }
+    }
 });
 
 function calendar(id, year, month) {
