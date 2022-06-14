@@ -34,7 +34,8 @@ namespace ToDoApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateTaskAsync(TasksListBLL newtasksList)
+        [Route("updatelist")]
+        public async Task<IActionResult> UpdateTaskAsync(TasksListModel newtasksList)
         {
             var result = await _tasksListService.UpdateTasksListAsync(newtasksList);
 
@@ -49,6 +50,7 @@ namespace ToDoApp.Controllers
         }
 
         [HttpDelete]
+        [Route("deletelist")]
         public async Task<IActionResult> DeleteTasksListAsync(int tasksListId)
         {
             var result = await _tasksListService.DeleteTasksListAsync(tasksListId);

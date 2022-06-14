@@ -44,23 +44,12 @@
                         if (Model.Lists.Count() == 0)
                         {
                             <h5>You dont't have any lists</h5>
-                            @*<div class="tasks-list__item">
-                                    <div class="icon">
-                                        <img src="~/img/12.png" />
-                                    </div>
-                                    <div class="name">
-                                        Home
-                                    </div>
-                                    <div class="settings">
-                                        <i class="fa-solid fa-gear"></i>
-                                    </div>
-                                </div>*@
                         }
                         else
                         {
                             foreach (var item in Model.Lists)
                             {
-                                <div class="tasks-list__item">
+                                <div class="tasks-list__item" id="list_@item.Id">
                                     <div class="icon">
                                         @{
                                             if (item.Icon.Length != 0)
@@ -80,7 +69,13 @@
                                     <div class="name">
                                         @item.Name
                                     </div>
-                                    <div class="settings">
+                                    <div hidden class="list-description">
+                                        @item.Description
+                                    </div>
+                                    <div hidden class="list-id">
+                                        @item.Id
+                                    </div>
+                                    <div class="settings" onclick="open_list_modal('list_@item.Id')">
                                         <i class="fa-solid fa-gear"></i>
                                     </div>
                                 </div>
@@ -89,7 +84,7 @@
                     }
                 </div>
 
-                <button id="create-list-button" class="btn btn-light">
+                <button class="btn btn-light" onclick="open_list_modal()">
                     <i class="fa-solid fa-plus"></i>
                     Create list
                 </button>
@@ -115,13 +110,13 @@
     </div>
 </div>
 
-<div id="modListDialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="modCreateListDialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div id="dialogContent" class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Create list</h4>
 
-                <button class="close" data-dismiss="modal" aria-label="Close">
+                <button class="close" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -148,9 +143,51 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" id="save-button">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clear_forms()">Close</button>
+                <button type="submit" class="btn btn-primary" id="create-list-button">Save</button>
             </div>
         </div>
     </div>
 </div>
+
+<div id="modUpdateListDialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="dialogContent" class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update list</h4>
+
+                <button class="close" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="update-list-form">
+                    <div class="text-field">
+                        <input class="text-field__input" id="update-list-id" type="number" placeholder="Id" name="Id" autocomplete="off" hidden />
+                    </div>
+
+                    <div class="text-field">
+                        <input class="text-field__input" id="update-list-name" type="text" name="Name" placeholder="Name" autocomplete="off" />
+                    </div>
+
+                    <div class="text-field">
+                        <textarea class="text-field__textarea" id="update-list-description" name="Description" placeholder="Description"></textarea>
+                    </div>
+
+                    <div class="text-field field-icon">
+                        <input class="text-field__input input-icon" id="update-list-icon" type="file" name="Icon" accept=".jpg, .jpeg, .png" />
+                        <img class="preview-icon-img" id="update-list-icon-img" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clear_forms()">Close</button>
+                <button type="submit" class="btn btn-primary" id="update-list-button">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

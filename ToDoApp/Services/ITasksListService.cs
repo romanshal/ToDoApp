@@ -11,7 +11,7 @@ namespace ToDoApp.Services
         Task<int> CreateTasksListAsync(TasksListModel tasksListDb);
         Task<IEnumerable<TasksListBLL>> GetTasksListsAsync();
         Task<TasksListBLL> GetTasksListByIdAsync(int tasksListId);
-        Task<int> UpdateTasksListAsync(TasksListBLL newTasksList);
+        Task<int> UpdateTasksListAsync(TasksListModel newTasksList);
         Task<int> DeleteTasksListAsync(int tasksListId);
     }
 }

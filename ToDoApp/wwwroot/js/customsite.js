@@ -1,4 +1,38 @@
-﻿$(function () {
+﻿function open_list_modal(item_id) {
+    if (item_id !== undefined) {
+        open_update_list_model(item_id);
+    } else {
+        open_create_list_modal();
+    }
+};
+
+function open_create_list_modal() {
+    $('#modCreateListDialog').modal('show');
+};
+
+function open_update_list_model(item_id) {
+    $('#update-list-id').val($('#' + item_id + ' .list-id').text().trim());
+
+    $('#update-list-name').val($('#' + item_id + ' .name').text().trim());
+
+    $('#update-list-description').val($('#' + item_id + ' .list-description').text().trim());
+
+
+
+    $('#update-list-icon-img').attr('src', $('#' + item_id + ' img').attr('src'));
+    document.getElementById('update-list-icon-img').style.visibility = "visible";
+
+    $('#modUpdateListDialog').modal('show');
+};
+
+function clear_forms() {
+    $('.text-field__input').val('');
+    document.getElementById('create-list-icon-img').style.visibility = "hidden";
+    $('.text-field__textarea').val('');
+    document.getElementById('update-list-icon-img').style.visibility = "hidden";
+}
+
+$(function () {
     $('#calendar-period li').click(function () {
         $('#calendar-period li').removeClass('activ');
         $(this).addClass('activ');
@@ -18,15 +52,11 @@
         }
     })
 
-    $('#create-list-button').click(function () {
-        $('#modListDialog').modal('show');
-    })
-
     $(function () {
-        $('#save-button').click(function (e) {
+        $('#create-list-button').click(function (e) {
             e.preventDefault();
 
-            var valid = check_create_list_form();
+            var valid = check_list_form('create-list');
 
             if (valid) {
                 var data = new FormData($('#creat-list-form')[0]);
@@ -36,7 +66,7 @@
                     type: 'POST',
                     data: data,
                     cache: false,
-/*                    dataType: 'json',*/
+                    /*                    dataType: 'json',*/
                     processData: false,
                     contentType: false,
                     success: function () {
@@ -50,22 +80,57 @@
         });
     });
 
-    function check_create_list_form() {
-        var valid_form = true;
+    $(function () {
+        $('#update-list-button').click(function (e) {
+            e.preventDefault();
 
-        var name = document.getElementById('create-list-name');
+            var valid = check_list_form('update-list');
+
+            if (valid) {
+                var data = new FormData($('#update-list-form')[0]);
+
+                $.ajax({
+                    url: '/updatelist',
+                    type: 'POST',
+                    data: data,
+                    cache: false,
+                    /*                    dataType: 'json',*/
+                    processData: false,
+                    contentType: false,
+                    success: function () {
+                        window.location.href = "";
+                    },
+                    error: function () {
+                        alert('Ops... Something went wrong :(');
+                    }
+                });
+            }
+        });
+    });
+
+    function check_list_form(form_name) {
+        var valid_form = true;
+        if (form_name === 'update-list') {
+            var id = document.getElementById(form_name + '-id');
+            if (id.value == '' || id.value === 0) {
+                valid_form = false;
+                alert("Неккоректный id!");
+            }
+        }
+
+        var name = document.getElementById(form_name + '-name');
         if (name.value == '') {
             name.style.border = '1px solid red';
             valid_form = false;
         }
 
-        var description = document.getElementById('create-list-description');
+        var description = document.getElementById(form_name + '-description');
         if (description.value == '') {
             description.style.border = '1px solid red';
             valid_form = false;
         }
 
-        var icon = document.getElementById('create-list-icon');
+        var icon = document.getElementById(form_name + '-icon');
         console.log(icon.files);
         if (icon.files.length === 0) {
             icon.style.border = '1px solid red';
@@ -75,25 +140,26 @@
         return valid_form;
     }
 
-    FReader = new FileReader();
+    $('#create-list-icon').change(function () {
+        loadImageFile(this, 'create-list-icon-img');
+    });
 
-    // событие, когда файл загрузится
-    FReader.onload = function (e) {
-        document.querySelector("#create-list-icon-img").src = e.target.result;
-        document.getElementById('create-list-icon-img').style.visibility = "visible";
-    };
-
-    // выполнение функции при выборки файла
-    document.querySelector("#create-list-icon").addEventListener("change", loadImageFile);
+    $('#update-list-icon').change(function () {
+        loadImageFile(this, 'update-list-icon-img');
+    });
 
     // функция выборки файла
-    function loadImageFile() {
-        var icon = document.getElementById('create-list-icon');
-        if (icon.files.length !== 0) {
-            var file = document.querySelector("#create-list-icon").files[0];
-            FReader.readAsDataURL(file);
+    function loadImageFile(input, id) {
+        if (input.files.length !== 0) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#' + id).attr('src', e.target.result);
+                document.getElementById(id).style.visibility = "visible";
+            }
+
+            reader.readAsDataURL(input.files[0]);
         } else {
-            document.getElementById('create-list-icon-img').style.visibility = "hidden";
+            document.getElementById(id).style.visibility = "hidden";
         }
     }
 });
