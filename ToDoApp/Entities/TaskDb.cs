@@ -14,7 +14,8 @@ namespace ToDoApp.Entities
         public int ListId { get; set; }
         public string Topic { get; set; }
         public string Description { get; set; }
-        public DateTime ChacngeDate { get; set; }
+        public DateTime ChangeDate { get; set; }
+        public DateTime TaskDate { get; set; }
         public int Status { get; set; }
 
         public virtual TasksListDb TasksList { get; set; }

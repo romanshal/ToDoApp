@@ -20,7 +20,7 @@ namespace ToDoApp.Services.Impl
             this._mapper = mapper;
         }
 
-        public async Task<int> CreateTaskAsync(TaskBLL task)
+        public async Task<int> CreateTaskAsync(TaskModel task)
         {
             return await _taskRepository.CreateTaskAsync(_mapper.Map<TaskDb>(task)).ContinueWith(r => r.Result);
         }
@@ -35,7 +35,7 @@ namespace ToDoApp.Services.Impl
             return await _taskRepository.GetTaskByIdAsync(taskId).ContinueWith(r => _mapper.Map<TaskBLL>(r.Result));
         }
 
-        public async Task<int> UpdateTaskAsync(TaskBLL newTask)
+        public async Task<int> UpdateTaskAsync(TaskModel newTask)
         {
             return await _taskRepository.UpdateTaskAsync(_mapper.Map<TaskDb>(newTask)).ContinueWith(r => r.Result);
         }

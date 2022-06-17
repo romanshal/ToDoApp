@@ -19,7 +19,7 @@ namespace ToDoApp.Controllers
 
         [HttpPost]
         [Route("createtask")]
-        public async Task<IActionResult> CreateTaskAsync(TaskBLL task)
+        public async Task<IActionResult> CreateTaskAsync(TaskModel task)
         {
             var result = await _taskService.CreateTaskAsync(task);
 
@@ -35,7 +35,7 @@ namespace ToDoApp.Controllers
 
         [HttpPut]
         [Route("updatetask")]
-        public async Task<IActionResult> UpdateTaskAsync(TaskBLL newTask)
+        public async Task<IActionResult> UpdateTaskAsync(TaskModel newTask)
         {
             var result = await _taskService.UpdateTaskAsync(newTask);
 

@@ -27,7 +27,7 @@ namespace ToDoApp.Repositories.Impl
 
         public async Task<IEnumerable<TaskDb>> GetTasksAsync()
         {
-            return await _databaseContext.Tasks.OrderBy(task => task.ChacngeDate).ToListAsync();
+            return await _databaseContext.Tasks.OrderBy(task => task.TaskDate).ToListAsync();
         }
 
         public async Task<TaskDb> GetTaskByIdAsync(int taskId)

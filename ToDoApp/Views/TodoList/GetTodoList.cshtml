@@ -19,7 +19,7 @@
 
         <div class="calendar-body">
             <div class="manager-widget">
-                <button class="btn btn-danger">
+                <button class="btn btn-danger" onclick="open_task_modal()">
                     <i class="fa-solid fa-plus"></i>
                     Create task
                 </button>
@@ -75,7 +75,7 @@
                                     <div hidden class="list-id">
                                         @item.Id
                                     </div>
-                                    <div class="settings" >
+                                    <div class="settings">
                                         <i class="fa-solid fa-gear" onclick="open_list_modal('list_@item.Id')"></i>
                                         <i class="fa-solid fa-trash-can" onclick="delete_list(@item.Id)"></i>
                                     </div>
@@ -111,6 +111,7 @@
     </div>
 </div>
 
+@*Modals*@
 <div id="modCreateListDialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div id="dialogContent" class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -156,7 +157,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Update list</h4>
-                
+
                 <button class="close" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -186,6 +187,48 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clear_forms()">Close</button>
                 <button type="submit" class="btn btn-primary" id="update-list-button">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modCreateTaskDialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="dialogContent" class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create task</h4>
+
+                <button class="close" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="create-task-form">
+                    <div class="text-field">
+                        @{
+                            var selectList = new SelectList(Model.Lists, "Id", "Name");
+                        }
+                        @Html.DropDownList("ListId", selectList as SelectList, new { @class = "text-field__dropdawn", @id = "create-task-listid" })
+
+                        <input class="text-field__input-date" id="create-task-date" name="TaskDate" type="date" />
+                    </div>
+
+                    <input class="text-field__input" id="create-task-id" type="number" placeholder="Id" name="Id" autocomplete="off" hidden />
+
+                    <div class="text-field">
+                        <input class="text-field__input" id="create-task-topic" type="text" name="Topic" placeholder="Topic" autocomplete="off" />
+                    </div>
+
+                    <div class="text-field">
+                        <textarea class="text-field__textarea" id="create-task-description" name="Description" placeholder="Description"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clear_forms()">Close</button>
+                <button type="submit" class="btn btn-primary" id="create-task-button">Save</button>
             </div>
         </div>
     </div>

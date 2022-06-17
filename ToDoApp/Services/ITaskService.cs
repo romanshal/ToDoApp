@@ -8,10 +8,10 @@ namespace ToDoApp.Services
 {
     public interface ITaskService
     {
-        Task<int> CreateTaskAsync(TaskBLL task);
+        Task<int> CreateTaskAsync(TaskModel task);
         Task<IEnumerable<TaskBLL>> GetTasksAsync();
         Task<TaskBLL> GetTaskByIdAsync(int taskId);
-        Task<int> UpdateTaskAsync(TaskBLL newTask);
+        Task<int> UpdateTaskAsync(TaskModel newTask);
         Task<int> UpdateTaskStatusAsync(int taskId, int status);
         Task<int> DeleteTaskAsync(int taskId);
     }

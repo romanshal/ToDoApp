@@ -272,6 +272,7 @@ button.close {
 }
 
 .text-field {
+    display: flex;
     margin-bottom: 1rem;
 }
 
@@ -368,3 +369,39 @@ button.close {
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
     }
+
+.text-field__dropdawn,
+.text-field__input-date {
+    display: block;
+    width: 45%;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: black;
+    background-color: #f8f9fa;
+    background-clip: padding-box;
+    border: 1px solid #a1a1a1;
+    border-radius: 0.7rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.text-field__input-date {
+    margin-left: auto;
+}
+
+.text-field__dropdawn::placeholder {
+    color: #a1a1a1;
+    opacity: 0.4;
+}
+
+.text-field__dropdawn:focus,
+.text-field__input-date:focus {
+    color: black;
+    background-color: #f8f9fa;
+    border-color: #bdbdbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+}
