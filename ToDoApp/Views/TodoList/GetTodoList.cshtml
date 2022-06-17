@@ -75,8 +75,9 @@
                                     <div hidden class="list-id">
                                         @item.Id
                                     </div>
-                                    <div class="settings" onclick="open_list_modal('list_@item.Id')">
-                                        <i class="fa-solid fa-gear"></i>
+                                    <div class="settings" >
+                                        <i class="fa-solid fa-gear" onclick="open_list_modal('list_@item.Id')"></i>
+                                        <i class="fa-solid fa-trash-can" onclick="delete_list(@item.Id)"></i>
                                     </div>
                                 </div>
                             }
@@ -155,7 +156,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Update list</h4>
-
+                
                 <button class="close" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
                     <i class="fa-solid fa-xmark"></i>
                 </button>

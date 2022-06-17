@@ -6,6 +6,22 @@
     }
 };
 
+function delete_list(list_id) {
+    if (confirm("Удалить? Уверены?")) {
+        $.ajax({
+            url: '/deletelist?tasksListId=' + list_id,
+            type: 'DELETE',
+            success: function () {
+                window.location.href = "";
+            },
+            error: function () {
+                alert('Ops... Something went wrong :(');
+            }
+        });
+    }
+}
+
+
 function open_create_list_modal() {
     $('#modCreateListDialog').modal('show');
 };
@@ -17,7 +33,7 @@ function open_update_list_model(item_id) {
 
     $('#update-list-description').val($('#' + item_id + ' .list-description').text().trim());
 
-
+    //TODO: добавление файла в input
 
     $('#update-list-icon-img').attr('src', $('#' + item_id + ' img').attr('src'));
     document.getElementById('update-list-icon-img').style.visibility = "visible";
@@ -66,7 +82,6 @@ $(function () {
                     type: 'POST',
                     data: data,
                     cache: false,
-                    /*                    dataType: 'json',*/
                     processData: false,
                     contentType: false,
                     success: function () {
@@ -91,7 +106,7 @@ $(function () {
 
                 $.ajax({
                     url: '/updatelist',
-                    type: 'POST',
+                    type: 'PUT',
                     data: data,
                     cache: false,
                     /*                    dataType: 'json',*/

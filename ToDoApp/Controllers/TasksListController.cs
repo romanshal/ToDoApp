@@ -33,7 +33,7 @@ namespace ToDoApp.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("updatelist")]
         public async Task<IActionResult> UpdateTaskAsync(TasksListModel newtasksList)
         {

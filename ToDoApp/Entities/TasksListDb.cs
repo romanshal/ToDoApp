@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace ToDoApp.Entities
 {
-    [Table("TasksList")]
     public class TasksListDb
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

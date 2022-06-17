@@ -17,6 +17,8 @@ namespace ToDoApp.Controllers
             this._taskService = taskService;
         }
 
+        [HttpPost]
+        [Route("createtask")]
         public async Task<IActionResult> CreateTaskAsync(TaskBLL task)
         {
             var result = await _taskService.CreateTaskAsync(task);
@@ -31,6 +33,8 @@ namespace ToDoApp.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("updatetask")]
         public async Task<IActionResult> UpdateTaskAsync(TaskBLL newTask)
         {
             var result = await _taskService.UpdateTaskAsync(newTask);
@@ -45,6 +49,8 @@ namespace ToDoApp.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("deletetask")]
         public async Task<IActionResult> UpdateTaskStatusAsync(int taskId, int status)
         {
             var result = await _taskService.UpdateTaskStatusAsync(taskId, status);
