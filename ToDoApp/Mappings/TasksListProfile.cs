@@ -14,11 +14,9 @@ namespace ToDoApp.Mappings
     {
         public TasksListProfile()
         {
-            CreateMap<TasksListDb, TasksListBLL>()
-                .ReverseMap();
+            CreateMap<TasksListDb, TasksListBLL>();
 
-            CreateMap<TasksListBLL, TasksListDb>()
-                .ReverseMap();
+            CreateMap<TasksListBLL, TasksListDb>();
 
             CreateMap<TasksListModel, TasksListDb>()
                 .ForMember(m => m.Icon, opt => opt.MapFrom(f => this.GetByteArray(f.Icon)));

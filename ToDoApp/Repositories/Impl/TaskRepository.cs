@@ -19,6 +19,7 @@ namespace ToDoApp.Repositories.Impl
 
         public async Task<int> CreateTaskAsync(TaskDb task)
         {
+            task.ChangeDate = DateTime.Now;
             _databaseContext.Tasks.Add(task);
             var countChanges = await _databaseContext.SaveChangesAsync().ConfigureAwait(false);
 

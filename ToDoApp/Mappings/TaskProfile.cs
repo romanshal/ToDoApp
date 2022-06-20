@@ -14,18 +14,15 @@ namespace ToDoApp.Mappings
         public TaskProfile()
         {
             CreateMap<TaskDb, TaskBLL>()
-                .ForMember(m => m.TaskDate, opt => opt.MapFrom(f => f.TaskDate.ToString("yyyy-MM-dd")))
-                .ForMember(m => m.ChacngeDate, opt => opt.MapFrom(f => f.ChangeDate.ToString("yyyy-MM-dd")))
-                .ReverseMap();
+                .ForMember(m => m.TaskDate, opt => opt.MapFrom(f => f.TaskDate != null ? f.TaskDate.ToString("yyyy-MM-dd") : null))
+                .ForMember(m => m.ChangeDate, opt => opt.MapFrom(f => f.ChangeDate != null ? f.ChangeDate.ToString("yyyy-MM-dd") : null));
 
             CreateMap<TaskBLL, TaskDb>()
                 .ForMember(m => m.TaskDate, opt => opt.MapFrom(f => DateTime.Parse(f.TaskDate)))
-                .ForMember(m => m.ChangeDate, opt => opt.MapFrom(f => DateTime.Parse(f.ChacngeDate)))
-                .ReverseMap();
+                .ForMember(m => m.ChangeDate, opt => opt.MapFrom(f => DateTime.Parse(f.ChangeDate)));
 
             CreateMap<TaskModel, TaskDb>()
-                .ForMember(m => m.TaskDate, opt => opt.MapFrom(f => DateTime.Parse(f.TaskDate)))
-                .ReverseMap();
+                .ForMember(m => m.TaskDate, opt => opt.MapFrom(f => DateTime.Parse(f.TaskDate)));
         }
     }
 }

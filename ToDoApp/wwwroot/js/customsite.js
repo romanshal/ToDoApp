@@ -57,7 +57,7 @@ function clear_forms() {
     document.getElementById('update-list-icon-img').style.visibility = "hidden";
 }
 
-$(function () {
+$(document).ready(function () {
     $('#calendar-period li').click(function () {
         $('#calendar-period li').removeClass('activ');
         $(this).addClass('activ');
@@ -68,8 +68,10 @@ $(function () {
         $(this).addClass('activ');
     })
 
-    $('#task-calendar-widget tbody td').click(function () {
+    $(document).on('click', '#task-calendar-widget tbody tr td', function () {
+        console.log(this);
         if (this.innerText === '' || this.innerText === undefined || this.innerText === null) {
+            console.log('Not valid value');
             return;
         } else {
             $('#task-calendar-widget tbody td').removeClass('activ');
@@ -245,7 +247,7 @@ $(function () {
     }
 });
 
-function calendar(id, year, month) {
+function calendar(id, year, month, isMainWidget) {
     var Dlast = new Date(year, month + 1, 0).getDate(),
         D = new Date(year, month, Dlast),
         DNlast = new Date(D.getFullYear(), D.getMonth(), Dlast).getDay(),
@@ -260,10 +262,41 @@ function calendar(id, year, month) {
     for (var i = 1; i <= Dlast; i++) {
         /*var dayId = i + '-' + (D.getMonth() + 1) + '-' + D.getFullYear();*/
         var dayId = D.getFullYear() + '-' + ('0' + (D.getMonth() + 1)).slice(-2) + '-' + ('0' + i).slice(-2);
+        let dayTasks = tasks.filter(x => x.taskDate === dayId);
         if (i == new Date().getDate() && D.getFullYear() == new Date().getFullYear() && D.getMonth() == new Date().getMonth()) {
             calendar += '<td class="today" id="' + dayId + '">' + i;
+            if (isMainWidget) {
+                if (dayTasks !== undefined) {
+                    if (dayTasks.length >= 3) {
+                        dayTasks = dayTasks.slice(1);
+                        for (value of dayTasks) {
+                            calendar += '<div>' + value.topic + '</div>';
+                        }
+                        calendar += '<div>More...</div>';
+                    } else {
+                        for (value of dayTasks) {
+                            calendar += '<div>' + value.topic + '</div>';
+                        }
+                    }
+                }
+            }
         } else {
             calendar += '<td id="' + dayId + '">' + i;
+            if (isMainWidget) {
+                if (dayTasks !== undefined) {
+                    if (dayTasks.length >= 3) {
+                        dayTasks = dayTasks.slice(1);
+                        for (value of dayTasks) {
+                            calendar += '<div>' + value.topic + '</div>';
+                        }
+                        calendar += '<div>More...</div>';
+                    } else {
+                        for (value of dayTasks) {
+                            calendar += '<div>' + value.topic + '</div>';
+                        }
+                    }
+                }
+            }
         }
         if (new Date(D.getFullYear(), D.getMonth(), i).getDay() == 0) {
             calendar += '<tr>';
@@ -280,21 +313,21 @@ function calendar(id, year, month) {
     }
 }
 
-calendar("calendar-widget", new Date().getFullYear(), new Date().getMonth());
-calendar("task-calendar-widget", new Date().getFullYear(), new Date().getMonth());
+calendar("calendar-widget", new Date().getFullYear(), new Date().getMonth(), true);
+calendar("task-calendar-widget", new Date().getFullYear(), new Date().getMonth(), false);
 
 // переключатель минус месяц
 document.querySelector('#calendar-widget thead tr:nth-child(1) td:nth-child(1)').onclick = function () {
-    calendar("calendar-widget", document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.month) - 1);
+    calendar("calendar-widget", document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.month) - 1, true);
 }
 document.querySelector('#task-calendar-widget thead tr:nth-child(1) td:nth-child(1)').onclick = function () {
-    calendar("task-calendar-widget", document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.month) - 1);
+    calendar("task-calendar-widget", document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.month) - 1, false);
 }
 
 // переключатель плюс месяц
 document.querySelector('#calendar-widget thead tr:nth-child(1) td:nth-child(3)').onclick = function () {
-    calendar("calendar-widget", document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.month) + 1);
+    calendar("calendar-widget", document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.month) + 1, true);
 }
 document.querySelector('#task-calendar-widget thead tr:nth-child(1) td:nth-child(3)').onclick = function () {
-    calendar("task-calendar-widget", document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.month) + 1);
+    calendar("task-calendar-widget", document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.month) + 1, false);
 }

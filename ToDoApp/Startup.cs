@@ -11,6 +11,7 @@ using ToDoApp.Services;
 using ToDoApp.Services.Impl;
 using Microsoft.Extensions.Configuration;
 using ToDoApp.Mappings;
+using AutoMapper;
 
 namespace ToDoApp
 {
@@ -26,8 +27,7 @@ namespace ToDoApp
                         options.UseSqlServer(Configuration["Data:TodoList:ConnectionString"]));
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
-            services.AddAutoMapper(typeof(TaskProfile));
-            services.AddAutoMapper(typeof(TasksListProfile));
+            services.AddAutoMapper(typeof(TaskProfile), typeof(TasksListProfile));
 
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<ITasksListRepository, TasksListRepository>();

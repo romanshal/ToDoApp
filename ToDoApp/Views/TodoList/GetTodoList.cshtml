@@ -181,6 +181,19 @@
                         <input class="text-field__input input-icon" id="update-list-icon" type="file" name="Icon" accept=".jpg, .jpeg, .png" />
                         <img class="preview-icon-img" id="update-list-icon-img" />
                     </div>
+
+                    <div class="text-field">
+                        <input class="text-field__input input-color" type="color" id="update-list-color" list="color_list" value="#32CD32">
+                        <datalist id="color_list">
+                            <option>#ff0000</option>
+                            <option>#0000ff</option>
+                            <option>#00ff00</option>
+                            <option>#ffff00</option>
+                            <option>#00ffff</option>
+                        </datalist>
+
+                        <label class="input-color__label" for="update-list-color">Task's color</label>
+                    </div>
                 </form>
             </div>
 
@@ -233,5 +246,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    @{ 
+        var json = Json.Serialize(Model.Tasks);
+    }
+    let tasks = @Html.Raw(json);
+</script>
 
 

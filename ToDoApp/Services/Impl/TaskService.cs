@@ -27,12 +27,12 @@ namespace ToDoApp.Services.Impl
 
         public async Task<IEnumerable<TaskBLL>> GetTasksAsync()
         {
-            return await _taskRepository.GetTasksAsync().ContinueWith(r => _mapper.Map<IEnumerable<TaskBLL>>(r.Result));
+            return await _taskRepository.GetTasksAsync().ContinueWith(r => _mapper.Map<IEnumerable<TaskDb>, IEnumerable<TaskBLL>>(r.Result));
         }
 
         public async Task<TaskBLL> GetTaskByIdAsync(int taskId)
         {
-            return await _taskRepository.GetTaskByIdAsync(taskId).ContinueWith(r => _mapper.Map<TaskBLL>(r.Result));
+            return await _taskRepository.GetTaskByIdAsync(taskId).ContinueWith(r => _mapper.Map<TaskDb, TaskBLL>(r.Result));
         }
 
         public async Task<int> UpdateTaskAsync(TaskModel newTask)

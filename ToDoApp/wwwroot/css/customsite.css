@@ -256,6 +256,7 @@
             min-height: 50px;
             height: 120px;
             width: 150px;
+            text-align: -webkit-center;
         }
 
             #calendar-widget tbody td.today {
@@ -263,6 +264,18 @@
                 border-top: 3px solid #e78c5c;
             }
 
+            #calendar-widget tbody td div {
+                border-radius: 5px;
+                margin: 3px;
+                color: white;
+                background: limegreen;
+                font-size: 15px;
+                width: 120px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                cursor: pointer;
+            }
 
 button.close {
     padding: 0.3rem 0.6rem !important;
@@ -274,6 +287,7 @@ button.close {
 .text-field {
     display: flex;
     margin-bottom: 1rem;
+    align-items: flex-end;
 }
 
 .field-icon {
@@ -334,6 +348,17 @@ button.close {
         .input-icon::file-selector-button:hover {
             opacity: 1;
         }
+
+.input-color {
+    width: 28%;
+}
+
+.input-color__label {
+    margin-left: 20px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+}
 
 .preview-icon-img {
     height: calc(2.25rem + 2px);
