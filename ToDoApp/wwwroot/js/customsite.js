@@ -283,7 +283,7 @@ function calendar_month(id, year, month, isMainWidget) {
                         for (value of dayTasks) {
                             calendar += '<div style="background:' + value.color + ';">' + value.topic + '</div>';
                         }
-                        calendar += '<div>More...</div>';
+                        calendar += '<div class="more">More...</div>';
                     } else {
                         for (value of dayTasks) {
                             calendar += '<div style="background:' + value.color + ';">' + value.topic + '</div>';
@@ -300,7 +300,7 @@ function calendar_month(id, year, month, isMainWidget) {
                         for (value of dayTasks) {
                             calendar += '<div style="background:' + value.color + ';">' + value.topic + '</div>';
                         }
-                        calendar += '<div>More...</div>';
+                        calendar += '<div class="more">More...</div>';
                     } else {
                         for (value of dayTasks) {
                             calendar += '<div style="background:' + value.color + ';">' + value.topic + '</div>';
