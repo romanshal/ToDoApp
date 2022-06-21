@@ -47,6 +47,8 @@ function open_update_list_model(item_id) {
     $('#update-list-icon-img').attr('src', $('#' + item_id + ' img').attr('src'));
     document.getElementById('update-list-icon-img').style.visibility = "visible";
 
+    $('#update-list-color').val($('#' + item_id + ' .list-color').text().trim());
+
     $('#modUpdateListDialog').modal('show');
 };
 
@@ -60,7 +62,10 @@ function clear_forms() {
 $(document).ready(function () {
     $('#calendar-period li').click(function () {
         $('#calendar-period li').removeClass('activ');
+        $('.calendar-widget').children().css('display', 'none');
         $(this).addClass('activ');
+        var id = $(this).children('a').attr('href');
+        $(id).css('display', '');
     })
 
     $('#nav-menu li').click(function () {
@@ -183,6 +188,12 @@ $(document).ready(function () {
             valid_form = false;
         }
 
+        var color = document.getElementById(form_name + '-color');
+        if (color.value == '') {
+            color.style.border = '1px solid red';
+            valid_form = false;
+        }
+
         return valid_form;
     }
 
@@ -247,7 +258,7 @@ $(document).ready(function () {
     }
 });
 
-function calendar(id, year, month, isMainWidget) {
+function calendar_month(id, year, month, isMainWidget) {
     var Dlast = new Date(year, month + 1, 0).getDate(),
         D = new Date(year, month, Dlast),
         DNlast = new Date(D.getFullYear(), D.getMonth(), Dlast).getDay(),
@@ -270,12 +281,12 @@ function calendar(id, year, month, isMainWidget) {
                     if (dayTasks.length >= 3) {
                         dayTasks = dayTasks.slice(1);
                         for (value of dayTasks) {
-                            calendar += '<div>' + value.topic + '</div>';
+                            calendar += '<div style="background:' + value.color + ';">' + value.topic + '</div>';
                         }
                         calendar += '<div>More...</div>';
                     } else {
                         for (value of dayTasks) {
-                            calendar += '<div>' + value.topic + '</div>';
+                            calendar += '<div style="background:' + value.color + ';">' + value.topic + '</div>';
                         }
                     }
                 }
@@ -287,12 +298,12 @@ function calendar(id, year, month, isMainWidget) {
                     if (dayTasks.length >= 3) {
                         dayTasks = dayTasks.slice(1);
                         for (value of dayTasks) {
-                            calendar += '<div>' + value.topic + '</div>';
+                            calendar += '<div style="background:' + value.color + ';">' + value.topic + '</div>';
                         }
                         calendar += '<div>More...</div>';
                     } else {
                         for (value of dayTasks) {
-                            calendar += '<div>' + value.topic + '</div>';
+                            calendar += '<div style="background:' + value.color + ';">' + value.topic + '</div>';
                         }
                     }
                 }
@@ -313,21 +324,21 @@ function calendar(id, year, month, isMainWidget) {
     }
 }
 
-calendar("calendar-widget", new Date().getFullYear(), new Date().getMonth(), true);
-calendar("task-calendar-widget", new Date().getFullYear(), new Date().getMonth(), false);
+calendar_month("calendar-month-widget", new Date().getFullYear(), new Date().getMonth(), true);
+calendar_month("task-calendar-widget", new Date().getFullYear(), new Date().getMonth(), false);
 
 // переключатель минус месяц
-document.querySelector('#calendar-widget thead tr:nth-child(1) td:nth-child(1)').onclick = function () {
-    calendar("calendar-widget", document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.month) - 1, true);
+document.querySelector('#calendar-month-widget thead tr:nth-child(1) td:nth-child(1)').onclick = function () {
+    calendar_month("calendar-month-widget", document.querySelector('#calendar-month-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar-month-widget thead td:nth-child(2)').dataset.month) - 1, true);
 }
 document.querySelector('#task-calendar-widget thead tr:nth-child(1) td:nth-child(1)').onclick = function () {
-    calendar("task-calendar-widget", document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.month) - 1, false);
+    calendar_month("task-calendar-widget", document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.month) - 1, false);
 }
 
 // переключатель плюс месяц
-document.querySelector('#calendar-widget thead tr:nth-child(1) td:nth-child(3)').onclick = function () {
-    calendar("calendar-widget", document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar-widget thead td:nth-child(2)').dataset.month) + 1, true);
+document.querySelector('#calendar-month-widget thead tr:nth-child(1) td:nth-child(3)').onclick = function () {
+    calendar_month("calendar-month-widget", document.querySelector('#calendar-month-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar-month-widget thead td:nth-child(2)').dataset.month) + 1, true);
 }
 document.querySelector('#task-calendar-widget thead tr:nth-child(1) td:nth-child(3)').onclick = function () {
-    calendar("task-calendar-widget", document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.month) + 1, false);
+    calendar_month("task-calendar-widget", document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#task-calendar-widget thead td:nth-child(2)').dataset.month) + 1, false);
 }

@@ -61,7 +61,7 @@
 .content {
     margin-left: 220px;
     background: #f5f5f5;
-    height: calc(100vh);
+    /* height: calc(100vh);*/
 }
 
 .custom-container {
@@ -69,8 +69,11 @@
 }
 
 .calendar-header {
+    position: fixed;
     display: flex;
     flex-direction: row;
+    background: #f5f5f5;
+    z-index: 2;
 }
 
 .calendar-period {
@@ -90,6 +93,11 @@
         font-weight: 500;
     }
 
+        .calendar-period .calendar-period__item a {
+            color: black;
+            text-decoration: none;
+        }
+
     .calendar-period .activ {
         background: red;
         color: #fff;
@@ -97,12 +105,13 @@
 
 .calendar-body {
     margin: 0 auto;
-    display: flex;
-    flex-direction: row;
+    /*    display: flex;
+    flex-direction: row;*/
+    padding-top: 65px;
 }
 
 .manager-widget {
-    width: 360px;
+    position: fixed;
     background: #fff;
     margin: 0 20px 0 0;
     padding: 20px;
@@ -205,7 +214,7 @@
             margin: auto;
         }
 
-#calendar-widget {
+#calendar-month-widget {
     width: 100%;
     line-height: 1.2em;
     font-size: 25px;
@@ -214,44 +223,44 @@
     border-spacing: 0px;
 }
 
-    #calendar-widget tr.dn td {
+    #calendar-month-widget tr.dn td {
         font-size: 15px;
     }
 
-    #calendar-widget thead tr.hn {
+    #calendar-month-widget thead tr.hn {
         background: #fff;
         height: 40px;
     }
 
-    #calendar-widget thead tr:last-child {
+    #calendar-month-widget thead tr:last-child {
         font-size: small;
         color: #555555;
         height: 100px;
         text-align: center;
     }
 
-    #calendar-widget thead tr:nth-child(1) td:nth-child(2) {
+    #calendar-month-widget thead tr:nth-child(1) td:nth-child(2) {
         color: #323232;
     }
 
-    #calendar-widget thead tr:nth-child(1) td:nth-child(1):hover,
-    #calendar-widget thead tr:nth-child(1) td:nth-child(3):hover,
+    #calendar-month-widget thead tr:nth-child(1) td:nth-child(1):hover,
+    #calendar-month-widget thead tr:nth-child(1) td:nth-child(3):hover,
     #task-calendar-widget thead tr:nth-child(1) td:nth-child(1):hover,
     #task-calendar-widget thead tr:nth-child(1) td:nth-child(3):hover {
         cursor: pointer;
     }
 
-    #calendar-widget tbody {
+    #calendar-month-widget tbody {
         background: #fff;
         text-align: center;
         border-top: 1px solid #c0c0c0;
     }
 
-        #calendar-widget tbody tr {
+        #calendar-month-widget tbody tr {
             border-bottom: 1px solid #c0c0c0;
         }
 
-        #calendar-widget tbody td {
+        #calendar-month-widget tbody td {
             color: #2c567a;
             min-height: 50px;
             height: 120px;
@@ -259,12 +268,12 @@
             text-align: -webkit-center;
         }
 
-            #calendar-widget tbody td.today {
+            #calendar-month-widget tbody td.today {
                 color: #e78c5c;
                 border-top: 3px solid #e78c5c;
             }
 
-            #calendar-widget tbody td div {
+            #calendar-month-widget tbody td div {
                 border-radius: 5px;
                 margin: 3px;
                 color: white;
@@ -430,3 +439,62 @@ button.close {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
 }
+
+.calendar-widget {
+    margin-left: 325px;
+}
+
+.calendar-week-widget {
+    width: 100%;
+}
+
+.week-widget__head {
+    width: 100%;
+    height: 40px;
+    background: #fff;
+}
+
+.week-widget__body {
+    width: 100%;
+    background: #fff;
+}
+
+.week-widget__days-name,
+.weel-widget__days {
+    box-sizing: border-box;
+    border-spacing: 10px 0;
+    display: table;
+    table-layout: fixed;
+    margin: 0;
+    width: 100%;
+    padding-left: 0px;
+    text-align: center;
+}
+
+.week-widget__days-name {
+    height: 100px;
+    background-color: #f5f5f5;
+    line-height: 99px;
+}
+
+.weel-widget__days {
+    height: 721px;
+    background: #f5f5f5;
+}
+
+    .week-widget__days-name li,
+    .weel-widget__days li {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: table-cell;
+        list-style: none;
+        margin: 0;
+        padding: 1px 0 0;
+        position: relative;
+        vertical-align: top;
+        font-size: 15px;
+    }
+
+    .weel-widget__days li {
+        background: #fff;
+    }

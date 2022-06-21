@@ -28,12 +28,12 @@ namespace ToDoApp.Repositories.Impl
 
         public async Task<IEnumerable<TaskDb>> GetTasksAsync()
         {
-            return await _databaseContext.Tasks.OrderBy(task => task.TaskDate).ToListAsync();
+            return await _databaseContext.Tasks.Include(u => u.TasksList).OrderBy(task => task.TaskDate).ToListAsync();
         }
 
         public async Task<TaskDb> GetTaskByIdAsync(int taskId)
         {
-            return await _databaseContext.Tasks.Where(task => task.Id == taskId).FirstOrDefaultAsync();
+            return await _databaseContext.Tasks.Include(u => u.TasksList).Where(task => task.Id == taskId).FirstOrDefaultAsync();
         }
 
         public async Task<int> UpdateTaskAsync(TaskDb newTask)

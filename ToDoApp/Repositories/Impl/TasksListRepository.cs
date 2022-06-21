@@ -44,6 +44,7 @@ namespace ToDoApp.Repositories.Impl
                 oldTasksList.Name = newTasksList.Name;
                 oldTasksList.Description = newTasksList.Description;
                 oldTasksList.Icon = newTasksList.Icon;
+                oldTasksList.Color = newTasksList.Color;
 
                 _databaseContext.Entry(oldTasksList).State = EntityState.Modified;
                 var countChanges = await _databaseContext.SaveChangesAsync().ConfigureAwait(false);

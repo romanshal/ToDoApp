@@ -11,8 +11,8 @@
 
             <ul id="calendar-period" class="calendar-period">
                 <li class="calendar-period__item">Day</li>
-                <li class="calendar-period__item">Week</li>
-                <li class="calendar-period__item activ">Month</li>
+                <li class="calendar-period__item"><a href="#calendar-week-widget">Week</a></li>
+                <li class="calendar-period__item activ"><a href="#calendar-month-widget">Month</a></li>
                 <li class="calendar-period__item">Year</li>
             </ul>
         </div>
@@ -75,6 +75,9 @@
                                     <div hidden class="list-id">
                                         @item.Id
                                     </div>
+                                    <div hidden class="list-color">
+                                        @item.Color
+                                    </div>
                                     <div class="settings">
                                         <i class="fa-solid fa-gear" onclick="open_list_modal('list_@item.Id')"></i>
                                         <i class="fa-solid fa-trash-can" onclick="delete_list(@item.Id)"></i>
@@ -91,16 +94,45 @@
                 </button>
             </div>
 
-            <table id="calendar-widget">
-                <thead>
-                    <tr class="hn">
-                        <td><b>‹</b>
-                        <td colspan="5">
-                        <td><b>›</b>
-                    <tr class="dn"><td>Mon<td>Tue<td>Wed<td>Thu<td>Fri<td>Sat<td>Sun
-                </thead>
-                <tbody></tbody>
-            </table>
+            <div class="calendar-widget">
+                <div class="calendar-week-widget" id="calendar-week-widget" style="display: none;">
+                    <div class="week-widget__head">
+
+                    </div>
+
+                    <div class="week-widget__body">
+                        <ul class="week-widget__days-name">
+                            <li>Mon</li>
+                            <li>Tue</li>
+                            <li>Wed</li>
+                            <li>Thu</li>
+                            <li>Fri</li>
+                            <li>Sat</li>
+                            <li>Sun</li>
+                        </ul>
+                        <ul class="weel-widget__days">
+                            <li class="week-widget__day"></li>
+                            <li class="week-widget__day"></li>
+                            <li class="week-widget__day"></li>
+                            <li class="week-widget__day"></li>
+                            <li class="week-widget__day"></li>
+                            <li class="week-widget__day"></li>
+                            <li class="week-widget__day"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <table id="calendar-month-widget">
+                    <thead>
+                        <tr class="hn">
+                            <td><b>‹</b>
+                            <td colspan="5">
+                            <td><b>›</b>
+                        <tr class="dn"><td>Mon<td>Tue<td>Wed<td>Thu<td>Fri<td>Sat<td>Sun
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -140,6 +172,19 @@
                     <div class="text-field field-icon">
                         <input class="text-field__input input-icon" id="create-list-icon" type="file" name="Icon" accept=".jpg, .jpeg, .png" />
                         <img class="preview-icon-img" id="create-list-icon-img" />
+                    </div>
+
+                    <div class="text-field">
+                        <input class="text-field__input input-color" type="color" id="create-list-color" list="color_list" name="Color" value="#32CD32">
+                        <datalist id="color_list">
+                            <option>#ff0000</option>
+                            <option>#0000ff</option>
+                            <option>#00ff00</option>
+                            <option>#ffff00</option>
+                            <option>#00ffff</option>
+                        </datalist>
+
+                        <label class="input-color__label" for="create-list-color">Task's color</label>
                     </div>
                 </form>
             </div>
@@ -183,7 +228,7 @@
                     </div>
 
                     <div class="text-field">
-                        <input class="text-field__input input-color" type="color" id="update-list-color" list="color_list" value="#32CD32">
+                        <input class="text-field__input input-color" type="color" id="update-list-color" name="Color" list="color_list" value="#32CD32">
                         <datalist id="color_list">
                             <option>#ff0000</option>
                             <option>#0000ff</option>
@@ -248,7 +293,7 @@
 </div>
 
 <script>
-    @{ 
+    @{
         var json = Json.Serialize(Model.Tasks);
     }
     let tasks = @Html.Raw(json);

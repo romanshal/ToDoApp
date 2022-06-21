@@ -14,5 +14,6 @@ namespace ToDoApp.Models
         public string ChangeDate { get; set; }
         public string TaskDate { get; set; }
         public int Status { get; set; }
+        public string Color { get; set; }
     }
 }
