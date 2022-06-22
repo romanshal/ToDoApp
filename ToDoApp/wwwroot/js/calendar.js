@@ -18,6 +18,10 @@ document.querySelector('#task-calendar-widget thead tr:nth-child(1) td:nth-child
 }
 
 
+function calendar_week(year, month, week) {
+
+};
+
 function calendar_month(id, year, month, isMainWidget) {
     var Dlast = new Date(year, month + 1, 0).getDate(),
         D = new Date(year, month, Dlast),
@@ -41,12 +45,12 @@ function calendar_month(id, year, month, isMainWidget) {
                     if (dayTasks.length >= 3) {
                         dayTasks = dayTasks.slice(1);
                         for (value of dayTasks) {
-                            calendar += '<div class="task-preview" style="background:' + value.color + ';">' + value.topic + '</div>';
+                            calendar += '<div class="task-preview" onclick="open_task_widget(' + value.id + ')" style="background:' + value.color + ';">' + value.topic + '</div>';
                         }
                         calendar += '<div class="more">More...</div>';
                     } else {
                         for (value of dayTasks) {
-                            calendar += '<div class="task-preview" style="background:' + value.color + ';">' + value.topic + '</div>';
+                            calendar += '<div class="task-preview" onclick="open_task_widget(' + value.id + ')" style="background:' + value.color + ';">' + value.topic + '</div>';
                         }
                     }
                 }
@@ -58,12 +62,12 @@ function calendar_month(id, year, month, isMainWidget) {
                     if (dayTasks.length >= 3) {
                         dayTasks = dayTasks.slice(1);
                         for (value of dayTasks) {
-                            calendar += '<div class="task-preview" style="background:' + value.color + ';">' + value.topic + '</div>';
+                            calendar += '<div class="task-preview" onclick="open_task_widget(' + value.id + ')" style="background:' + value.color + ';">' + value.topic + '</div>';
                         }
                         calendar += '<div class="more">More...</div>';
                     } else {
                         for (value of dayTasks) {
-                            calendar += '<div class="task-preview" style="background:' + value.color + ';">' + value.topic + '</div>';
+                            calendar += '<div class="task-preview" onclick="open_task_widget(' + value.id + ')" style="background:' + value.color + ';">' + value.topic + '</div>';
                         }
                     }
                 }

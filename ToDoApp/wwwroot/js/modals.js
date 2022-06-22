@@ -6,16 +6,6 @@
     }
 };
 
-function open_task_modal() {
-    var date = $('#task-calendar-widget tbody tr .activ').attr('id');
-    if (date !== undefined) {
-        console.log(date);
-        $('#create-task-date').val(date);
-        console.log($('#create-task-date').val());
-        $('#modCreateTaskDialog').modal('show');
-    }
-}
-
 function open_create_list_modal() {
     $('#modCreateListDialog').modal('show');
 };
@@ -36,3 +26,38 @@ function open_update_list_model(item_id) {
 
     $('#modUpdateListDialog').modal('show');
 };
+
+function open_task_modal() {
+    var date = $('#task-calendar-widget tbody tr .activ').attr('id');
+    if (date !== undefined) {
+        console.log(date);
+        $('#create-task-date').val(date);
+        console.log($('#create-task-date').val());
+        $('#modCreateTaskDialog').modal('show');
+    }
+}
+
+function open_task_widget(task_id) {
+    var task = tasks.find(t => t.id === task_id);
+    if (task != undefined) {
+        console.log(task);
+        $('#update-task-listid').val(task.listId).change();
+        $('#update-task-date').val(task.taskDate);
+        $('#update-task-id').val(task.id);
+        $('#update-task-topic').val(task.topic);
+        $('#update-task-description').val(task.description);
+
+        $('#task-widget').css('display', 'block');
+    }
+}
+
+function close_task_form() {
+    $('#update-task-listid').val('').change();
+    $('#update-task-date').val('');
+    $('#update-task-id').val('');
+    $('#update-task-topic').val('');
+    $('#update-task-description').val('');
+
+    $('#task-widget').css('display', 'none');
+}
+

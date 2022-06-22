@@ -111,9 +111,9 @@
 
 .calendar-body {
     margin: 0 auto;
-    /*    display: flex;
-    flex-direction: row;*/
     padding-top: 65px;
+    display: inline-flex;
+    width: 100%;
 }
 
 .manager-widget {
@@ -276,6 +276,7 @@
             height: 120px;
             width: 150px;
             text-align: -webkit-center;
+            min-width: 110px;
         }
 
             #calendar-month-widget tbody td.today,
@@ -302,26 +303,42 @@
                 height: 25px;
             }
 
-                #calendar-month-widget tbody td div.more {
-                    color: black !important;
-                    background: #f8f9fa !important;
+            #calendar-month-widget tbody td div.more {
+                color: black !important;
+                background: #f8f9fa !important;
+            }
+
+                #calendar-month-widget tbody td div.more:hover {
+                    background: #e2e6ea !important;
                 }
 
-                    #calendar-month-widget tbody td div.more:hover {
-                        background: #e2e6ea !important;
-                    }
-
-button.close {
+button.close-modal,
+button.close-task {
     padding: 0.3rem 0.6rem !important;
-    margin: -0.5rem -0.5rem -1rem auto !important;
     background: red !important;
     border-radius: 50%;
+}
+
+button.close-modal {
+    margin: -0.5rem -0.5rem -1rem auto !important;
+}
+
+button.close-task {
+    float: left !important;
+}
+
+button.close:active,
+button.close:focus {
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
 }
 
 .text-field {
     display: flex;
     margin-bottom: 1rem;
     align-items: flex-end;
+    position: relative;
 }
 
 .field-icon {
@@ -343,6 +360,40 @@ button.close {
     border: 1px solid #a1a1a1;
     border-radius: 0.7rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.floating-label {
+    font-size: 1rem;
+    color: #cccccc;
+    position: absolute;
+    pointer-events: none;
+    top: 6px;
+    left: 12px;
+    transition: all 0.1s ease;
+}
+
+.fixed-label {
+    position: absolute;
+    pointer-events: none;
+    transition: all 0.1s ease;
+    top: -15px;
+    bottom: 0px;
+    left: 0px;
+    font-size: 11px;
+    opacity: 1;
+    color: #404040;
+}
+
+.text-field__input:focus ~ .floating-label,
+.text-field__textarea:focus ~ .floating-label,
+.text-field__input:not(:focus):valid ~ .floating-label,
+.text-field__textarea:not(:focus):valid ~ .floating-label {
+    top: -15px;
+    bottom: 0px;
+    left: 0px;
+    font-size: 11px;
+    opacity: 1;
+    color: #404040;
 }
 
     .text-field__input::placeholder {
@@ -465,8 +516,47 @@ button.close {
     box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
 }
 
+.task-widget {
+    margin-left: 20px;
+    width: 700px;
+    box-shadow: -5px 2px 8px rgb(0 0 0 / 10%);
+    padding: 5px 15px;
+    background: #fff;
+    display: none;
+}
+
+.task-widget__header {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    align-items: baseline;
+}
+
+    .task-widget__header .task-title {
+        margin-left: 20px;
+    }
+
+    .task-widget__header .task-done-btn {
+        margin-left: auto;
+        width: 120px;
+    }
+
+.task-widget__body {
+    margin-top: 2rem;
+}
+
+.task-widget__footer{
+
+}
+
 .calendar-widget {
     margin-left: 325px;
+    width: 100%;
+}
+
+.task-widget__footer {
+    margin-top: 2rem;
+    text-align: end;
 }
 
 .calendar-week-widget {

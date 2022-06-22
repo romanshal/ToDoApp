@@ -4,6 +4,10 @@
     Layout = "_Layout";
 }
 
+@{
+    var selectList = new SelectList(Model.Lists, "Id", "Name");
+}
+
 <div class="custom-container">
     <div id="calendar" class="calendar">
         <div class="calendar-header">
@@ -133,6 +137,48 @@
                     <tbody></tbody>
                 </table>
             </div>
+
+            <div class="task-widget" id="task-widget">
+                <div class="task-widget__header">
+                    <button class="close close-task" aria-label="Close" onclick="close_task_form()">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                    <h4 class="task-title">Edit task</h4>
+
+                    <button class="task-done-btn btn btn-primary">
+                        Done
+                    </button>
+                </div>
+                <div class="task-widget__body">
+                    <form id="create-task-form">
+                        <div class="text-field">
+                            @Html.DropDownList("ListId", selectList as SelectList, new { @class = "text-field__dropdawn", @id = "update-task-listid" })
+                            <label class="fixed-label">List</label>
+
+                            <input class="text-field__input-date" id="update-task-date" name="TaskDate" type="date" />
+                        </div>
+
+                        <input class="text-field__input" id="update-task-id" type="number" name="Id" autocomplete="off" hidden />
+
+                        <div class="text-field">
+                            <input class="text-field__input" id="update-task-topic" type="text" name="Topic" autocomplete="off" required />
+                            <label class="floating-label">Topic</label>
+                        </div>
+
+                        <div class="text-field">
+                            <textarea class="text-field__textarea" id="update-task-description" name="Description" required></textarea>
+                            <label class="floating-label">Description</label>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="task-widget__footer">
+                    <button class="btn btn-primary" id="update-task-button">
+                        Save
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -150,7 +196,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Create list</h4>
 
-                <button class="close" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
+                <button class="close close-modal" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -158,24 +204,27 @@
             <div class="modal-body">
                 <form id="creat-list-form">
                     <div class="text-field">
-                        <input class="text-field__input" id="create-list-id" type="number" placeholder="Id" name="Id" autocomplete="off" value="0" hidden />
+                        <input class="text-field__input modal-input" id="create-list-id" type="number" name="Id" autocomplete="off" value="0" hidden />
                     </div>
 
                     <div class="text-field">
-                        <input class="text-field__input" id="create-list-name" type="text" name="Name" placeholder="Name" autocomplete="off" />
+                        <input class="text-field__input modal-input" id="create-list-name" type="text" name="Name" autocomplete="off" required />
+                        <label class="floating-label">Name</label>
                     </div>
 
                     <div class="text-field">
-                        <textarea class="text-field__textarea" id="create-list-description" name="Description" placeholder="Description"></textarea>
+                        <textarea class="text-field__textarea modal-input" id="create-list-description" name="Description" required></textarea>
+                        <label class="floating-label">Description</label>
                     </div>
 
                     <div class="text-field field-icon">
-                        <input class="text-field__input input-icon" id="create-list-icon" type="file" name="Icon" accept=".jpg, .jpeg, .png" />
+                        <input class="text-field__input input-icon" id="create-list-icon" type="file" name="Icon" accept=".jpg, .jpeg, .png" required />
+                        <label class="fixed-label">Icon</label>
                         <img class="preview-icon-img" id="create-list-icon-img" />
                     </div>
 
                     <div class="text-field">
-                        <input class="text-field__input input-color" type="color" id="create-list-color" list="color_list" name="Color" value="#32CD32">
+                        <input class="text-field__input input-color" type="color" id="create-list-color" list="color_list" name="Color" value="#32CD32" required />
                         <datalist id="color_list">
                             <option>#ff0000</option>
                             <option>#0000ff</option>
@@ -184,7 +233,7 @@
                             <option>#00ffff</option>
                         </datalist>
 
-                        <label class="input-color__label" for="create-list-color">Task's color</label>
+                        <label class="fixed-label">Task's color</label>
                     </div>
                 </form>
             </div>
@@ -203,7 +252,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Update list</h4>
 
-                <button class="close" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
+                <button class="close close-modal" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -211,24 +260,27 @@
             <div class="modal-body">
                 <form id="update-list-form">
                     <div class="text-field">
-                        <input class="text-field__input" id="update-list-id" type="number" placeholder="Id" name="Id" autocomplete="off" hidden />
+                        <input class="text-field__input modal-input" id="update-list-id" type="number" placeholder="Id" name="Id" autocomplete="off" hidden />
                     </div>
 
                     <div class="text-field">
-                        <input class="text-field__input" id="update-list-name" type="text" name="Name" placeholder="Name" autocomplete="off" />
+                        <input class="text-field__input modal-input" id="update-list-name" type="text" name="Name" autocomplete="off" required />
+                        <label class="floating-label">Name</label>
                     </div>
 
                     <div class="text-field">
-                        <textarea class="text-field__textarea" id="update-list-description" name="Description" placeholder="Description"></textarea>
+                        <textarea class="text-field__textarea modal-input" id="update-list-description" name="Description" required></textarea>
+                        <label class="floating-label">Description</label>
                     </div>
 
                     <div class="text-field field-icon">
-                        <input class="text-field__input input-icon" id="update-list-icon" type="file" name="Icon" accept=".jpg, .jpeg, .png" />
+                        <input class="text-field__input input-icon" id="update-list-icon" type="file" name="Icon" accept=".jpg, .jpeg, .png" required />
+                        <label class="fixed-label">Icon</label>
                         <img class="preview-icon-img" id="update-list-icon-img" />
                     </div>
 
                     <div class="text-field">
-                        <input class="text-field__input input-color" type="color" id="update-list-color" name="Color" list="color_list" value="#32CD32">
+                        <input class="text-field__input input-color" type="color" id="update-list-color" name="Color" list="color_list" value="#32CD32" required />
                         <datalist id="color_list">
                             <option>#ff0000</option>
                             <option>#0000ff</option>
@@ -237,7 +289,7 @@
                             <option>#00ffff</option>
                         </datalist>
 
-                        <label class="input-color__label" for="update-list-color">Task's color</label>
+                        <label class="fixed-label">Task's color</label>
                     </div>
                 </form>
             </div>
@@ -256,7 +308,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Create task</h4>
 
-                <button class="close" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
+                <button class="close close-modal" data-dismiss="modal" aria-label="Close" onclick="clear_forms()">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -264,22 +316,22 @@
             <div class="modal-body">
                 <form id="create-task-form">
                     <div class="text-field">
-                        @{
-                            var selectList = new SelectList(Model.Lists, "Id", "Name");
-                        }
                         @Html.DropDownList("ListId", selectList as SelectList, new { @class = "text-field__dropdawn", @id = "create-task-listid" })
+                        <label class="fixed-label">List</label>
 
                         <input class="text-field__input-date" id="create-task-date" name="TaskDate" type="date" />
                     </div>
 
-                    <input class="text-field__input" id="create-task-id" type="number" placeholder="Id" name="Id" autocomplete="off" hidden />
+                    <input class="text-field__input modal-input" id="create-task-id" type="number" placeholder="Id" name="Id" autocomplete="off" hidden />
 
                     <div class="text-field">
-                        <input class="text-field__input" id="create-task-topic" type="text" name="Topic" placeholder="Topic" autocomplete="off" />
+                        <input class="text-field__input modal-input" id="create-task-topic" type="text" name="Topic" autocomplete="off" required />
+                        <label class="floating-label">Topic</label>
                     </div>
 
                     <div class="text-field">
-                        <textarea class="text-field__textarea" id="create-task-description" name="Description" placeholder="Description"></textarea>
+                        <textarea class="text-field__textarea modal-input" id="create-task-description" name="Description" required></textarea>
+                        <label class="floating-label">Description</label>
                     </div>
                 </form>
             </div>

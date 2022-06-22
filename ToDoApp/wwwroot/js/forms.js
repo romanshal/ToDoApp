@@ -1,10 +1,10 @@
 ﻿function clear_forms() {
     setTimeout(() => {
-        $('.text-field__input').val('');
+        $('.modal-input').val('');
+        $('.input-icon').val('');
         document.getElementById('create-list-icon-img').style.visibility = "hidden";
-        $('.text-field__textarea').val('');
         document.getElementById('update-list-icon-img').style.visibility = "hidden";
-    },1000);
+    },500);
     
 }
 
