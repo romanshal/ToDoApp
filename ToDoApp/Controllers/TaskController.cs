@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ToDoApp.Models;
 using ToDoApp.Services;
+using Newtonsoft.Json;
 
 namespace ToDoApp.Controllers
 {
@@ -33,6 +34,23 @@ namespace ToDoApp.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("gettask")]
+        public async Task<IActionResult> GetTaskAsync(int id)
+        {
+            var result = await _taskService.GetTaskByIdAsync(id);
+
+            if (result != null)
+            {
+                var json = JsonConvert.SerializeObject(result);
+                return Ok(json);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPut]
         [Route("updatetask")]
         public async Task<IActionResult> UpdateTaskAsync(TaskModel newTask)
@@ -49,8 +67,8 @@ namespace ToDoApp.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("deletetask")]
+        [HttpPut]
+        [Route("updatestatustask")]
         public async Task<IActionResult> UpdateTaskStatusAsync(int taskId, int status)
         {
             var result = await _taskService.UpdateTaskStatusAsync(taskId, status);
@@ -65,6 +83,8 @@ namespace ToDoApp.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("deletetask")]
         public async Task<IActionResult> DeleteTaskAsync(int taskId)
         {
             var result = await _taskService.DeleteTaskAsync(taskId);

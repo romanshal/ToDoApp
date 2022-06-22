@@ -74,6 +74,8 @@
     flex-direction: row;
     background: #f5f5f5;
     z-index: 2;
+    left: 240px;
+    right: 10px;
 }
 
 .calendar-period {
@@ -102,6 +104,10 @@
         background: red;
         color: #fff;
     }
+
+        .calendar-period .activ a {
+            color: #fff;
+        }
 
 .calendar-body {
     margin: 0 auto;
@@ -281,7 +287,8 @@
                 border-top: 3px solid #e78c5c;
             }
 
-            #calendar-month-widget tbody td div {
+            #calendar-month-widget tbody td .task-preview,
+            #calendar-month-widget tbody td .more {
                 border-radius: 5px;
                 margin: 3px;
                 color: white;
@@ -292,12 +299,17 @@
                 text-overflow: ellipsis;
                 overflow: hidden;
                 cursor: pointer;
+                height: 25px;
             }
 
                 #calendar-month-widget tbody td div.more {
                     color: black !important;
                     background: #f8f9fa !important;
                 }
+
+                    #calendar-month-widget tbody td div.more:hover {
+                        background: #e2e6ea !important;
+                    }
 
 button.close {
     padding: 0.3rem 0.6rem !important;
@@ -510,4 +522,5 @@ button.close {
 
     .weel-widget__days li {
         background: #fff;
+        border-bottom: 1px solid #c0c0c0;
     }
